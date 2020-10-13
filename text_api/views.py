@@ -7,10 +7,14 @@ from .schemas import TextSchema
 
 class TextAPI(MethodView):
 
-    def get(self):
-        texts = Text.query.order_by(Text.id).all()
-        text_schema = TextSchema(many=True)
-        return jsonify(text_schema.dump(texts))
+    def get(self, text_id):
+        if not text_id:
+            texts = Text.query.order_by(Text.id).all()
+            text_schema = TextSchema(many=True)
+            return jsonify(text_schema.dump(texts))
+        text = Text.query.get(text_id)
+        text_schema = TextSchema()
+        return text_schema.dump(text)
 
     def post(self):
         text = request.get_json()
