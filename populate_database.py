@@ -2,21 +2,14 @@ import json
 
 import requests
 
+from page_scraper import scrape_url
+
 LIST_VIEW_ENDPOINT = 'http://127.0.0.1:5000/texts/'
+URLS = [
+    'https://squirro.com/2020/05/29/how_synpulse_is_using_squirro_over_aws_to_provide_fs_firms_with_a_competitive_edge/'
+]
 
-with open('test_payload.json', 'r') as file:
-    payloads = json.loads(file.read())
-
-def populate_database():
-    for payload in payloads:
-        response = requests.post(LIST_VIEW_ENDPOINT, json=payload)
-        print(response.text)
-
-
-def delete_all():
-    for number in range(1, 4):
-        response = requests.delete(f'{LIST_VIEW_ENDPOINT}/{number}')
-        print(response.text)
-
-populate_database()
-# delete_all()
+for url in URLS:
+    payload = dict(lines=scrape_url(url))
+    response = requests.post(LIST_VIEW_ENDPOINT, json=payload)
+    print(response.text)

@@ -5,3 +5,5 @@ marshmallow-sqlalchemy==0.23.1
 flask-marshmallow==0.14.0
 requests==2.24.0
 SQLAlchemy-Utils==0.36.8
+beautifulsoup4==4.9.3
+nltk==3.5
