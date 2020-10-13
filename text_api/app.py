@@ -1,39 +1,19 @@
-import sys
-from logging.config import dictConfig
-
 from flask import Flask
 from flask_marshmallow import Marshmallow
 from flask_sqlalchemy import SQLAlchemy
 
+from settings.common import configure_logging
+from settings.local.dev import Config
+
 db = SQLAlchemy()
 marshmallow = Marshmallow()
 
-
-dictConfig(
-    {
-        "version": 1,
-        "formatters": {
-            "default": {
-                "format": "[%(asctime)s] %(levelname)s in %(module)s: %(message)s",
-            }
-        },
-        "handlers": {
-            "wsgi": {
-                "class": "logging.StreamHandler",
-                "stream": sys.stdout,
-                "formatter": "default",
-            }
-        },
-        "root": {"level": "INFO", "handlers": ["wsgi"]},
-    }
-)
+configure_logging()
 
 
-def create_app():
+def create_app(config_class=Config):
     app = Flask(__name__)
-    app.config["SQLALCHEMY_ECHO"] = True
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///text.db"
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config.from_object(config_class)
 
     from .models import db
 
