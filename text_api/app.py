@@ -19,5 +19,10 @@ def create_app():
     marshmallow.init_app(app)
 
     from .views import TextAPI
-    app.add_url_rule('/texts/', view_func=TextAPI.as_view('show_texts'))
+    text_view = TextAPI.as_view('text_api')
+    app.add_url_rule('/texts/', defaults={'text_id': None},
+                     view_func=text_view, methods=['GET', ])
+    app.add_url_rule('/users/', view_func=text_view, methods=['POST', ])
+    app.add_url_rule('/users/<int:text_id>', view_func=text_view,
+                     methods=['GET', 'PUT', 'DELETE'])
     return app

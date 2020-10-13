@@ -19,3 +19,10 @@ class TextAPI(MethodView):
         db.session.add(new_text)
         db.session.commit()
         return text_schema.dump(new_text), 201
+
+    def delete(self, text_id):
+        # delete a single user
+        text_to_delete = Text.query.get(text_id)
+        db.session.delete(text_to_delete)
+        db.session.commit()
+        return "Record deleted", 204
