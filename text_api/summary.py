@@ -24,7 +24,7 @@ class Summary:
         return [
             word
             for word in self.formatted_text.split(" ")
-            if word not in nltk.corpus.stopwords.words("english")
+            if word not in nltk.corpus.stopwords.words("english") and word
         ]
 
     def _calculate_word_frequencies(self):
@@ -38,22 +38,22 @@ class Summary:
         app.logger.info("Calculating weighted word frequencies for text: %s", self.text)
         word_frequencies = self._calculate_word_frequencies()
         weighted_word_frequencies = dict()
-        maximum_frequency = max(word_frequencies.values())
         for word in word_frequencies.keys():
-            weighted_word_frequencies[word] = word_frequencies[word] / maximum_frequency
+            weighted_word_frequencies[word] = word_frequencies[word] / max(word_frequencies.values())
         return weighted_word_frequencies
 
     def _calculate_sentence_scores(
-        self, weighted_word_frequencies, max_sentence_length=MAXIMUM_SENTENCE_LENGTH
+            self, weighted_word_frequencies, max_sentence_length=MAXIMUM_SENTENCE_LENGTH
     ):
         app.logger.info("Calculating sentence scores for text: %s", self.text)
         sentence_scores = defaultdict(int)
         sentences = nltk.sent_tokenize(self.text)
         for sentence in sentences:
-            for word in nltk.word_tokenize(sentence.lower()):
+            for word in nltk.word_tokenize(sentence):
+                print(word)
                 if (
-                    word in weighted_word_frequencies.keys()
-                    and len(sentence.split(" ")) < max_sentence_length
+                        word in weighted_word_frequencies.keys()
+                        and len(sentence.split(" ")) < max_sentence_length
                 ):
                     sentence_scores[sentence] += weighted_word_frequencies[word]
         return sentence_scores
