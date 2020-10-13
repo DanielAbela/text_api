@@ -1,9 +1,11 @@
-from flask import jsonify, request
+from flask import jsonify, request, Flask
 from flask.views import MethodView
 
-from .summary import Summary
 from .models import Text, db
 from .schemas import TextSchema
+from .summary import Summary
+
+app = Flask(__name__)
 
 
 class TextAPI(MethodView):
@@ -19,7 +21,9 @@ class TextAPI(MethodView):
 
     def post(self):
         text = request.get_json()
-        text['summary'] = Summary(text).create()
+        app.logger.debug('Creating summary for text: %s', text['lines'])
+        text['summary'] = Summary(text['lines']).create()
+        app.logger.debug('Summary created: %s', text['summary'])
         text_schema = TextSchema()
         new_text = text_schema.load(text, session=db.session)
         db.session.add(new_text)
