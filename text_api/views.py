@@ -34,3 +34,12 @@ class TextAPI(MethodView):
         db.session.delete(text_to_delete)
         db.session.commit()
         return "Record deleted", 204
+
+
+class SummaryAPI(MethodView):
+    def get(self, text_id):
+        text = Text.query.get(text_id)
+        text_schema = TextSchema()
+        text = text_schema.dump(text)
+        print(text)
+        return jsonify({key: value for key, value in text.items() if key in ["id", "summary"]})

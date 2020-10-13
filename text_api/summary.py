@@ -39,11 +39,13 @@ class Summary:
         word_frequencies = self._calculate_word_frequencies()
         weighted_word_frequencies = dict()
         for word in word_frequencies.keys():
-            weighted_word_frequencies[word] = word_frequencies[word] / max(word_frequencies.values())
+            weighted_word_frequencies[word] = word_frequencies[word] / max(
+                word_frequencies.values()
+            )
         return weighted_word_frequencies
 
     def _calculate_sentence_scores(
-            self, weighted_word_frequencies, max_sentence_length=MAXIMUM_SENTENCE_LENGTH
+        self, weighted_word_frequencies, max_sentence_length=MAXIMUM_SENTENCE_LENGTH
     ):
         app.logger.info("Calculating sentence scores for text: %s", self.text)
         sentence_scores = defaultdict(int)
@@ -52,8 +54,8 @@ class Summary:
             for word in nltk.word_tokenize(sentence):
                 print(word)
                 if (
-                        word in weighted_word_frequencies.keys()
-                        and len(sentence.split(" ")) < max_sentence_length
+                    word in weighted_word_frequencies.keys()
+                    and len(sentence.split(" ")) < max_sentence_length
                 ):
                     sentence_scores[sentence] += weighted_word_frequencies[word]
         return sentence_scores

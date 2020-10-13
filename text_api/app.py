@@ -23,9 +23,10 @@ def create_app(config_class=Config):
 
     marshmallow.init_app(app)
 
-    from .views import TextAPI
+    from .views import TextAPI, SummaryAPI
 
     text_view = TextAPI.as_view("text_api")
+    summary_view = SummaryAPI.as_view("summary_api")
     app.add_url_rule(
         "/texts/",
         defaults={"text_id": None},
@@ -43,5 +44,8 @@ def create_app(config_class=Config):
     )
     app.add_url_rule(
         "/texts/<string:text_id>", view_func=text_view, methods=["GET", "PUT", "DELETE"]
+    )
+    app.add_url_rule(
+        "/summaries/<string:text_id>", view_func=summary_view, methods=["GET"]
     )
     return app
