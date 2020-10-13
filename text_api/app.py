@@ -23,6 +23,6 @@ def create_app():
     app.add_url_rule('/texts/', defaults={'text_id': None},
                      view_func=text_view, methods=['GET', ])
     app.add_url_rule('/texts/', view_func=text_view, methods=['POST', ])
-    app.add_url_rule('/texts/<int:text_id>', view_func=text_view,
+    app.add_url_rule('/texts/<string:text_id>', view_func=text_view,
                      methods=['GET', 'PUT', 'DELETE'])
     return app
