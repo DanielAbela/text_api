@@ -14,9 +14,8 @@ class TextAPI(MethodView):
 
     def post(self):
         text = request.get_json()
-        schema = TextSchema()
-        new_text = schema.load(text, session=db.session).data
+        text_schema = TextSchema()
+        new_text = text_schema.load(text, session=db.session)
         db.session.add(new_text)
         db.session.commit()
-
-        return schema.dump(new_text).data, 201
+        return text_schema.dump(new_text), 201

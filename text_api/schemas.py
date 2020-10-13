@@ -1,14 +1,13 @@
 from flask_marshmallow import Marshmallow
-
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from .models import Text
 
 marshmallow = Marshmallow()
 
 
-class TextSchema(marshmallow.SQLAlchemySchema):
+class TextSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Text
+        include_relationships = True
+        load_instance = True
 
-    id = marshmallow.auto_field()
-    lines = marshmallow.auto_field()
-    summary = marshmallow.auto_field()
