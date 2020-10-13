@@ -9,9 +9,9 @@ def clean_up_text(text):
 
 
 def scrape_url(url, tag_attributes=None):
-    web_page = urlopen(Request(url, headers={'User-Agent': 'Mozilla/5.0'})).read()
+    web_page = urlopen(Request(url, headers={"User-Agent": "Mozilla/5.0"})).read()
     page_soup = soup(web_page, "html.parser")
-    paragraphs = page_soup.find_all('p', attrs={'class': tag_attributes})
+    paragraphs = page_soup.find_all("p", attrs={"class": tag_attributes})
     article_text = ""
     for paragraph in paragraphs:
         article_text += paragraph.text

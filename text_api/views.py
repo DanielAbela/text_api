@@ -9,7 +9,6 @@ app = Flask(__name__)
 
 
 class TextAPI(MethodView):
-
     def get(self, text_id):
         if not text_id:
             texts = Text.query.order_by(Text.id).all()
@@ -21,9 +20,9 @@ class TextAPI(MethodView):
 
     def post(self):
         text = request.get_json()
-        app.logger.debug('Creating summary for text: %s', text['lines'])
-        text['summary'] = Summary(text['lines']).create()
-        app.logger.debug('Summary created: %s', text['summary'])
+        app.logger.debug("Creating summary for text: %s", text["lines"])
+        text["summary"] = Summary(text["lines"]).create()
+        app.logger.debug("Summary created: %s", text["summary"])
         text_schema = TextSchema()
         new_text = text_schema.load(text, session=db.session)
         db.session.add(new_text)

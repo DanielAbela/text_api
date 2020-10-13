@@ -8,6 +8,12 @@ def generate_id():
 
 
 class Text(db.Model):
-    id = db.Column(UUIDType(binary=False), primary_key=True, default=generate_id, unique=True, nullable=False)
+    id = db.Column(
+        UUIDType(binary=False),
+        primary_key=True,
+        default=generate_id,
+        unique=True,
+        nullable=False,
+    )
     lines = db.Column(db.Text)
     summary = db.Column(db.Text)

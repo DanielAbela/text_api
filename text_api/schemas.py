@@ -10,4 +10,3 @@ class TextSchema(SQLAlchemyAutoSchema):
         model = Text
         include_relationships = True
         load_instance = True
-
