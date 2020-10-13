@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_marshmallow import Marshmallow
+from flask_sqlalchemy import SQLAlchemy
 
-from .views import ShowTexts
-
+db = SQLAlchemy()
 marshmallow = Marshmallow()
 
 
@@ -18,5 +18,6 @@ def create_app():
     from .schemas import marshmallow
     marshmallow.init_app(app)
 
-    app.add_url_rule('/texts/', view_func=ShowTexts.as_view('show_texts'))
+    from .views import TextAPI
+    app.add_url_rule('/texts/', view_func=TextAPI.as_view('show_texts'))
     return app

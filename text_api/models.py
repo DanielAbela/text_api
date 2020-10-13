@@ -1,13 +1,11 @@
 from uuid import uuid4
 
-from flask_sqlalchemy import SQLAlchemy
+from .app import db
 
 
 def generate_id():
     return uuid4().hex
 
-
-db = SQLAlchemy()
 
 
 class Text(db.Model):
