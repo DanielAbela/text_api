@@ -31,3 +31,6 @@ def populate_database():
         app.logging.info('Making request to %s with payload %s:', url, payload)
         response = requests.post(LIST_VIEW_ENDPOINT, json=payload)
         app.logging.info('Response: %s', response.text)
+
+
+populate_database()

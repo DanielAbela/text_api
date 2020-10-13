@@ -2,8 +2,8 @@ from flask import Flask
 from flask_marshmallow import Marshmallow
 from flask_sqlalchemy import SQLAlchemy
 
-from settings.common import configure_logging
-from settings.local.dev import Config
+from .settings.common import configure_logging
+from .settings.local.dev import Config
 
 db = SQLAlchemy()
 marshmallow = Marshmallow()
