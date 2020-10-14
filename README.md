@@ -10,12 +10,16 @@ pip install -r prerequirements.txt
 pip install -r requirements.txt 
 
 ###Running the app
-cd to text_api
+**cd text_api**
+
 Make sure the following environment variables are set:
-set FLASK_APP=app
+
+**set FLASK_APP=app**
 
 Run the following script to initialize the database with values.
-python populate_database
+
+**python populate_database**
 
 Start the app
-flask run 
+
+**flask run**
