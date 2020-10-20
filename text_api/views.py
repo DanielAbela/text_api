@@ -41,4 +41,6 @@ class SummaryAPI(MethodView):
         text = Text.query.get(text_id)
         text_schema = TextSchema()
         text = text_schema.dump(text)
-        return jsonify({key: value for key, value in text.items() if key in ["id", "summary"]})
+        return jsonify(
+            {key: value for key, value in text.items() if key in ["id", "summary"]}
+        )

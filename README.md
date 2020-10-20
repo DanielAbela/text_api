@@ -24,3 +24,5 @@ Start the app
 Run the following script to initialize the database with values.
 
 **python populate_database**
+
+Source for summarization logic:  https://stackabuse.com/text-summarization-with-nltk-in-python/.

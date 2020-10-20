@@ -9,6 +9,9 @@ LIST_VIEW_ENDPOINT = "http://127.0.0.1:5000/texts/"
 URLS = [
     "https://en.wikipedia.org/wiki/J._M._W._Turner",
     "https://en.wikipedia.org/wiki/Johann_Sebastian_Bach",
+    "https://en.wikipedia.org/wiki/Wolfgang_Amadeus_Mozart",
+    "https://en.wikipedia.org/wiki/Sergei_Rachmaninoff",
+    "https://en.wikipedia.org/wiki/B%C3%A9la_Bart%C3%B3k",
 ]
 
 if os.path.exists("text.db"):
