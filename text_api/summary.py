@@ -52,7 +52,6 @@ class Summary:
         sentences = nltk.sent_tokenize(self.text)
         for sentence in sentences:
             for word in nltk.word_tokenize(sentence):
-                print(word)
                 if (
                     word in weighted_word_frequencies.keys()
                     and len(sentence.split(" ")) < max_sentence_length
